@@ -226,6 +226,18 @@
     document.querySelector(".fireworks").appendChild(fw);
     setTimeout(() => fw.remove(), 1000);
   }, 1200);
+  // Add this inside <script> tag
+document.addEventListener("click", (e) => {
+  for (let i = 0; i < 15; i++) {
+    const fw = document.createElement("div");
+    fw.className = "firework";
+    fw.style.left = e.clientX + Math.random() * 30 - 15 + "px";
+    fw.style.top = e.clientY + Math.random() * 30 - 15 + "px";
+    document.querySelector(".fireworks").appendChild(fw);
+    setTimeout(() => fw.remove(), 1000);
+  }
+});
+
 </script>
 
 </body>
