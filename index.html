@@ -1,41 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Happy Birthday Amisha 💖</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday My Bebu 💖</title>
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       background: linear-gradient(to right, #ffc0cb, #ffe4e1);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #fff;
       text-align: center;
       overflow-x: hidden;
+      position: relative;
     }
 
     h1 {
-      margin-top: 60px;
       font-size: 2.8rem;
-      color: #fff;
+      margin-top: 2rem;
       animation: glow 2s ease-in-out infinite alternate;
     }
 
     @keyframes glow {
       from { text-shadow: 0 0 10px #fff, 0 0 20px #ff69b4; }
-      to   { text-shadow: 0 0 20px #fff, 0 0 40px #ff1493; }
+      to { text-shadow: 0 0 20px #fff, 0 0 30px #ff1493; }
     }
 
-    p, .poem-line {
-      font-size: 1.2rem;
-      margin: 10px auto;
-      padding: 0 10px;
-      max-width: 95%;
+    .photo-section {
+      margin: 2rem auto;
+      max-width: 90%;
+    }
+
+    .photo-section img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      margin: 1rem auto;
+    }
+
+    .special-message {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 20px;
+      margin: 2rem auto;
+      border-radius: 20px;
+      max-width: 90%;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #fff;
     }
 
     button {
-      margin: 20px auto;
+      margin-top: 1.5rem;
       padding: 12px 24px;
       font-size: 1rem;
       background-color: #ff69b4;
@@ -50,61 +71,24 @@
       background-color: #ff3e8c;
     }
 
-    #note {
-      display: none;
-      margin-top: 20px;
-      font-size: 1.1rem;
-      background: rgba(255, 255, 255, 0.2);
-      padding: 15px;
-      border-radius: 12px;
-    }
-
-    .poem, .photos {
-      margin-top: 30px;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 20px;
-      padding: 20px;
-      max-width: 95%;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .photos img {
-      width: 90%;
-      max-width: 350px;
-      border-radius: 20px;
-      margin: 15px 0;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      animation: fadeIn 3s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    /* Animations */
     .hearts, .balloons, .fireworks {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       pointer-events: none;
-      overflow: hidden;
-    }
-
-    .heart, .balloon {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      transform: rotate(45deg);
-      animation: floatUp 10s infinite ease-in-out;
-      opacity: 0.7;
+      z-index: 1;
     }
 
     .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
       background: pink;
+      transform: rotate(45deg);
+      animation: floatUp 10s infinite ease-in-out;
+      opacity: 0.7;
     }
 
     .heart::before, .heart::after {
@@ -116,27 +100,12 @@
       border-radius: 50%;
     }
 
-    .heart::before {
-      top: -10px;
-      left: 0;
-    }
-
-    .heart::after {
-      left: -10px;
-      top: 0;
-    }
-
-    .balloon {
-      background: radial-gradient(#ff69b4, #ff1493);
-      border-radius: 50%;
-      width: 30px;
-      height: 40px;
-      animation: floatUp 15s infinite ease-in-out;
-    }
+    .heart::before { top: -10px; left: 0; }
+    .heart::after { left: -10px; top: 0; }
 
     @keyframes floatUp {
-      0% { transform: translateY(0); opacity: 0.8; }
-      100% { transform: translateY(-100vh); opacity: 0; }
+      0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
     }
 
     .firework {
@@ -153,56 +122,49 @@
       100% { transform: scale(6); opacity: 0; }
     }
 
+    .audio-player {
+      margin-top: 20px;
+      z-index: 999;
+      position: relative;
+    }
+
     @media (max-width: 600px) {
-      h1 { font-size: 2rem; margin-top: 40px; }
-      .poem-line, p { font-size: 1rem; }
-      button { font-size: 0.9rem; }
+      h1 { font-size: 2rem; }
+      .special-message { font-size: 1rem; }
+      button { padding: 10px 18px; font-size: 0.9rem; }
     }
   </style>
 </head>
 <body>
 
-<!-- Romantic Background Song -->
-<audio autoplay loop>
-  <source src="https://cdn.pixabay.com/audio/2023/03/26/audio_7cd4edbd9f.mp3" type="audio/mpeg">
-</audio>
+<h1>Happy Birthday Amisha 💖</h1>
 
-<h1>Happy Birthday Amisha 🎂💖</h1>
-<p>To my beautiful BEBU, every heartbeat of mine whispers your name.</p>
-<button onclick="document.getElementById('note').style.display='block'">Click for a special message 💝</button>
-<p id="note">
-  My Bebu, you've held my heart even when I couldn't hold myself. Through every storm, you stood by me with love and strength.
-  You are the light in my darkest days, the warmth in my coldest nights. You are my home. <br><br>
-  Happy Birthday to the most beautiful girl inside and out 💖 Your smile makes my world better and your love completes me.
-  I promise to cherish you, adore you, and love you more with every heartbeat. 💘
-</p>
-
-<div class="poem">
-  <p class="poem-line">I may not be the first to wish you today,</p>
-  <p class="poem-line">But I’ll be the last, forever I’ll stay.</p>
-  <p class="poem-line">In every moment, through each rising sun,</p>
-  <p class="poem-line">My love for you will never be undone.</p>
-  <p class="poem-line">You’re my heartbeat, my peace, my smile,</p>
-  <p class="poem-line">With you, life feels truly worthwhile.</p>
-  <p class="poem-line">Your laughter, your eyes, your heart so true,</p>
-  <p class="poem-line">There’s nothing in this world I’d trade for you.</p>
-  <p class="poem-line">So here's my wish wrapped with this rhyme,</p>
-  <p class="poem-line">Love you BEBU, till the end of time. 💞</p>
+<div class="photo-section">
+  <img src="bebu-photo.jpg" alt="With My Bebu">
+  <img src="bebu-photo (1).jpg" alt="With My Bebu at Hill">
 </div>
 
-<!-- Photos -->
-<div class="photos">
-  <img src="bebu-photo.jpg" alt="Beautiful couple moment 1">
-  <img src="bebu-photo (1).jpg" alt="Beautiful couple moment 2">
+<div class="special-message">
+  <p>My dearest Bebu,</p>
+  <p>On your special day, I just want to say thank you for being my strength, my joy, and my peace through every storm. 💫</p>
+  <p>You’ve stood by me when life felt heavy, held my hand when I wanted to give up, and reminded me how beautiful love can be. 🥹💞</p>
+  <p>Your smile lights up my world and your love heals my heart.</p>
+  <p>I feel the luckiest man to be loved by someone as beautiful — inside and out — as you.</p>
+  <p>Happy Birthday, my jaan. May this day be as radiant as your soul. 🌸</p>
+  <p>Forever yours,<br/>💘 Your Love</p>
 </div>
 
-<!-- Animation Layers -->
+<div class="audio-player">
+  <button onclick="document.getElementById('myAudio').play()">🎧 Play My Heart</button>
+  <audio id="myAudio" src="zaki (online-audio-converter.com).mp3"></audio>
+</div>
+
 <div class="hearts"></div>
-<div class="balloons"></div>
 <div class="fireworks"></div>
 
 <script>
-  for (let i = 0; i < 25; i++) {
+  // Floating Hearts
+  for (let i = 0; i < 30; i++) {
     const heart = document.createElement("div");
     heart.className = "heart";
     heart.style.left = Math.random() * 100 + "vw";
@@ -210,35 +172,19 @@
     document.querySelector(".hearts").appendChild(heart);
   }
 
-  for (let i = 0; i < 20; i++) {
-    const balloon = document.createElement("div");
-    balloon.className = "balloon";
-    balloon.style.left = Math.random() * 100 + "vw";
-    balloon.style.animationDelay = Math.random() * 10 + "s";
-    document.querySelector(".balloons").appendChild(balloon);
-  }
-
-  setInterval(() => {
-    const fw = document.createElement("div");
-    fw.className = "firework";
-    fw.style.left = Math.random() * window.innerWidth + "px";
-    fw.style.top = Math.random() * (window.innerHeight / 2) + "px";
-    document.querySelector(".fireworks").appendChild(fw);
-    setTimeout(() => fw.remove(), 1000);
-  }, 1200);
-  // Add this inside <script> tag
-document.addEventListener("click", (e) => {
-  for (let i = 0; i < 15; i++) {
-    const fw = document.createElement("div");
-    fw.className = "firework";
-    fw.style.left = e.clientX + Math.random() * 30 - 15 + "px";
-    fw.style.top = e.clientY + Math.random() * 30 - 15 + "px";
-    document.querySelector(".fireworks").appendChild(fw);
-    setTimeout(() => fw.remove(), 1000);
-  }
-});
-
+  // Fireworks on click
+  document.addEventListener("click", (e) => {
+    for (let i = 0; i < 15; i++) {
+      const fw = document.createElement("div");
+      fw.className = "firework";
+      fw.style.left = e.clientX + Math.random() * 30 - 15 + "px";
+      fw.style.top = e.clientY + Math.random() * 30 - 15 + "px";
+      document.querySelector(".fireworks").appendChild(fw);
+      setTimeout(() => fw.remove(), 1000);
+    }
+  });
 </script>
 
 </body>
 </html>
+
