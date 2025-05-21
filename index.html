@@ -12,24 +12,26 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #fff;
       text-align: center;
-      overflow-x: hidden;
-      box-sizing: border-box;
+      overflow: hidden;
+      position: relative;
     }
 
     h1 {
       margin-top: 80px;
-      font-size: 2.5rem;
+      font-size: 3rem;
       color: #fff;
-      padding: 0 15px;
-      animation: fadeIn 2s ease;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #fff, 0 0 20px #ff69b4, 0 0 30px #ff69b4; }
+      to   { text-shadow: 0 0 20px #fff, 0 0 30px #ff1493, 0 0 40px #ff1493; }
     }
 
     p, .poem-line {
       font-size: 1.2rem;
       margin: 15px auto;
       max-width: 90%;
-      animation: fadeIn 3s ease;
-      padding: 0 10px;
     }
 
     button {
@@ -41,7 +43,6 @@
       border-radius: 30px;
       color: white;
       cursor: pointer;
-      animation: fadeIn 4s ease;
       transition: 0.3s;
     }
 
@@ -53,7 +54,6 @@
       display: none;
       margin-top: 20px;
       font-size: 1.1rem;
-      animation: fadeIn 2s ease-in;
     }
 
     .poem {
@@ -64,32 +64,26 @@
       max-width: 90%;
       margin-left: auto;
       margin-right: auto;
-      animation: fadeIn 3s ease;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hearts {
+    /* Floating Hearts */
+    .hearts, .balloons, .fireworks {
       position: absolute;
-      width: 100%;
-      height: 100%;
       top: 0;
       left: 0;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
-      overflow: hidden;
     }
 
-    .heart {
+    .heart, .balloon {
       position: absolute;
       width: 20px;
       height: 20px;
       background: pink;
       transform: rotate(45deg);
-      animation: float 5s infinite ease-in-out;
-      opacity: 0.6;
+      animation: floatUp 10s infinite ease-in-out;
+      opacity: 0.7;
     }
 
     .heart::before,
@@ -112,47 +106,92 @@
       top: 0;
     }
 
-    @keyframes float {
-      0% { transform: translateY(0) rotate(45deg); }
-      100% { transform: translateY(-100vh) rotate(45deg); }
+    .balloon {
+      background: radial-gradient(#ff69b4, #ff1493);
+      border-radius: 50% 50% 50% 50%;
+      width: 30px;
+      height: 40px;
+      animation: floatUp 15s infinite ease-in-out;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Fireworks burst effect */
+    .firework {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: yellow;
+      border-radius: 50%;
+      animation: explode 1s ease-out forwards;
+    }
+
+    @keyframes explode {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(6); opacity: 0; }
     }
   </style>
 </head>
 <body>
-  <!-- Romantic Background Music -->
-  <audio autoplay loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
 
-  <div class="hearts">
-    <script>
-      for (let i = 0; i < 30; i++) {
-        const heart = document.createElement("div");
-        heart.className = "heart";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDelay = Math.random() * 5 + "s";
-        document.querySelector(".hearts").appendChild(heart);
-      }
-    </script>
-  </div>
+<audio autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+</audio>
 
-  <h1>Happy Birthday Amisha 🎂💖</h1>
-  <p>To my beautiful BEBU, every heartbeat of mine whispers your name.</p>
-  <button onclick="document.getElementById('note').style.display='block'">Click for a special message 💝</button>
-  <p id="note">Dear Amisha, you are my first thought in the morning and my last wish at night. Happy Birthday jaan 💘</p>
+<h1>Happy Birthday Amisha 🎂💖</h1>
+<p>To my beautiful BEBU, every heartbeat of mine whispers your name.</p>
+<button onclick="document.getElementById('note').style.display='block'">Click for a special message 💝</button>
+<p id="note">Dear Amisha, you are my first thought in the morning and my last wish at night. Happy Birthday jaan 💘</p>
 
-  <div class="poem">
-    <p class="poem-line">I may not be the first to wish you today,</p>
-    <p class="poem-line">But I’ll be the last, forever I’ll stay.</p>
-    <p class="poem-line">In every moment, through each rising sun,</p>
-    <p class="poem-line">My love for you will never be undone.</p>
-    <p class="poem-line">You’re my heartbeat, my peace, my smile,</p>
-    <p class="poem-line">With you, life feels truly worthwhile.</p>
-    <p class="poem-line">Your laughter, your eyes, your heart so true,</p>
-    <p class="poem-line">There’s nothing in this world I’d trade for you.</p>
-    <p class="poem-line">So here's my wish wrapped with this rhyme,</p>
-    <p class="poem-line">Love you BEBU, till the end of time. 💞</p>
-  </div>
+<div class="poem">
+  <p class="poem-line">I may not be the first to wish you today,</p>
+  <p class="poem-line">But I’ll be the last, forever I’ll stay.</p>
+  <p class="poem-line">In every moment, through each rising sun,</p>
+  <p class="poem-line">My love for you will never be undone.</p>
+  <p class="poem-line">You’re my heartbeat, my peace, my smile,</p>
+  <p class="poem-line">With you, life feels truly worthwhile.</p>
+  <p class="poem-line">Your laughter, your eyes, your heart so true,</p>
+  <p class="poem-line">There’s nothing in this world I’d trade for you.</p>
+  <p class="poem-line">So here's my wish wrapped with this rhyme,</p>
+  <p class="poem-line">Love you BEBU, till the end of time. 💞</p>
+</div>
+
+<div class="hearts"></div>
+<div class="balloons"></div>
+<div class="fireworks"></div>
+
+<script>
+  // Floating Hearts
+  for (let i = 0; i < 25; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDelay = Math.random() * 5 + "s";
+    document.querySelector(".hearts").appendChild(heart);
+  }
+
+  // Balloons
+  for (let i = 0; i < 20; i++) {
+    const balloon = document.createElement("div");
+    balloon.className = "balloon";
+    balloon.style.left = Math.random() * 100 + "vw";
+    balloon.style.animationDelay = Math.random() * 10 + "s";
+    document.querySelector(".balloons").appendChild(balloon);
+  }
+
+  // Fireworks
+  setInterval(() => {
+    const fw = document.createElement("div");
+    fw.className = "firework";
+    fw.style.left = Math.random() * window.innerWidth + "px";
+    fw.style.top = Math.random() * window.innerHeight / 2 + "px";
+    document.querySelector(".fireworks").appendChild(fw);
+    setTimeout(() => fw.remove(), 1000);
+  }, 1200);
+</script>
+
 </body>
 </html>
