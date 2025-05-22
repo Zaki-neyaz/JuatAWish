@@ -1,10 +1,11 @@
 {
-  "name": "Happy Birthday My Bebu",
-  "short_name": "BebuBDay",
-  "start_url": ".",
+  "name": "Happy Birthday Amisha 💖",
+  "short_name": "Bebu App",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffe4e1",
   "theme_color": "#ffc0cb",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "icon-192.png",
