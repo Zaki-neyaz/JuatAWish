@@ -5,6 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Happy Birthday My Bebu 💖</title>
   <style>
+    .photo-slider {
+  position: relative;
+  max-width: 100%;
+  margin: 2rem auto;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slides img {
+  min-width: 100%;
+  border-radius: 20px;
+}
+
+.photo-slider .prev,
+.photo-slider .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 105, 180, 0.7);
+  border: none;
+  color: white;
+  font-size: 2rem;
+  padding: 10px 15px;
+  cursor: pointer;
+  z-index: 2;
+  border-radius: 50%;
+}
+
+.photo-slider .prev { left: 10px; }
+.photo-slider .next { right: 10px; }
+
+@media (max-width: 600px) {
+  .slides img {
+    border-radius: 10px;
+  }
+
+  .photo-slider .prev,
+  .photo-slider .next {
+    font-size: 1.5rem;
+    padding: 8px 12px;
+  }
+}
+
     * {
       margin: 0;
       padding: 0;
@@ -33,16 +81,16 @@
 
     .photo-section <div class="photo-slider">
   <div class="slides">
-    <img src="bebu-photo.jpg" alt="With My Bebu">
-    <img src="3.jpg" alt="With My Bebu">
-    <img src="2.jpg" alt="With My Bebu at Hill">
-    <img src="1.jpg" alt="With My Bebu">
-    <img src="4.jpg" alt="With My Bebu at Hill">
-    <!-- Add more images here if needed -->
+    <img src="bebu-photo.jpg" alt="With My Bebu" />
+    <img src="3.jpg" alt="With My Bebu" />
+    <img src="2.jpg" alt="With My Bebu at Hill" />
+    <img src="1.jpg" alt="With My Bebu" />
+    <img src="4.jpg" alt="With My Bebu at Hill" />
   </div>
   <button class="prev" onclick="changeSlide(-1)">❮</button>
   <button class="next" onclick="changeSlide(1)">❯</button>
 </div>
+
 
     .photo-section img {
       width: 100%;
@@ -191,6 +239,27 @@
       setTimeout(() => fw.remove(), 1000);
     }
   });
+  let currentIndex = 0;
+
+function showSlide(index) {
+  const slides = document.querySelector(".slides");
+  const totalSlides = slides.children.length;
+  if (index >= totalSlides) currentIndex = 0;
+  else if (index < 0) currentIndex = totalSlides - 1;
+  else currentIndex = index;
+  slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+
+function changeSlide(direction) {
+  showSlide(currentIndex + direction);
+}
+
+// Optional: Auto-slide every 5s
+setInterval(() => changeSlide(1), 5000);
+
+// Initialize
+showSlide(0);
+
 </script>
 
 </body>
