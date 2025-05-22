@@ -1,0 +1,20 @@
+{
+  "name": "Happy Birthday My Bebu",
+  "short_name": "BebuBDay",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffe4e1",
+  "theme_color": "#ffc0cb",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
