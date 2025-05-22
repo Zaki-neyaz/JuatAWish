@@ -31,10 +31,15 @@
       to { text-shadow: 0 0 20px #fff, 0 0 30px #ff1493; }
     }
 
-    .photo-section {
-      margin: 2rem auto;
-      max-width: 90%;
-    }
+    .photo-section <div class="photo-slider">
+  <div class="slides">
+    <img src="bebu-photo.jpg" alt="With My Bebu">
+    <img src="bebu-photo (1).jpg" alt="With My Bebu at Hill">
+    <!-- Add more images here if needed -->
+  </div>
+  <button class="prev" onclick="changeSlide(-1)">❮</button>
+  <button class="next" onclick="changeSlide(1)">❯</button>
+</div>
 
     .photo-section img {
       width: 100%;
