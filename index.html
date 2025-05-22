@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#ffc0cb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <title>Happy Birthday My Bebu 💖</title>
+  <link rel="manifest" href="manifest.json">
   <style>
     * {
       margin: 0;
@@ -24,6 +27,9 @@
       font-size: 2.8rem;
       margin-top: 2rem;
       animation: glow 2s ease-in-out infinite alternate;
+      background: linear-gradient(90deg, #ff69b4, #ff1493);
+      -webkit-background-clip: text;
+      color: transparent;
     }
 
     @keyframes glow {
@@ -31,16 +37,11 @@
       to { text-shadow: 0 0 20px #fff, 0 0 30px #ff1493; }
     }
 
-    /* === Slider === */
-    .photo-slider {
-      position: relative;
-      width: 90%;
-      max-width: 500px;
+    .slider-container {
+      max-width: 90%;
       margin: 2rem auto;
       overflow: hidden;
-      border-radius: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      z-index: 5;
+      position: relative;
     }
 
     .slides {
@@ -49,32 +50,32 @@
     }
 
     .slides img {
-      width: 100%;
-      flex-shrink: 0;
-      object-fit: cover;
+      width: 100vw;
+      max-width: 400px;
       border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      margin: auto;
     }
 
-    .photo-slider .prev,
-    .photo-slider .next {
+    .slider-btn {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background-color: rgba(255, 105, 180, 0.8);
-      border: none;
+      background: rgba(0,0,0,0.3);
       color: white;
+      border: none;
       font-size: 2rem;
-      padding: 10px 16px;
-      cursor: pointer;
+      padding: 10px;
       border-radius: 50%;
-      z-index: 10;
+      cursor: pointer;
+      z-index: 2;
     }
 
-    .photo-slider .prev { left: 10px; }
-    .photo-slider .next { right: 10px; }
+    .prev { left: 10px; }
+    .next { right: 10px; }
 
     .special-message {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.2);
       padding: 20px;
       margin: 2rem auto;
       border-radius: 20px;
@@ -82,9 +83,10 @@
       font-size: 1.1rem;
       line-height: 1.6;
       color: #fff;
+      backdrop-filter: blur(10px);
     }
 
-    button {
+    button, .audio-player button {
       margin-top: 1.5rem;
       padding: 12px 24px;
       font-size: 1rem;
@@ -100,7 +102,7 @@
       background-color: #ff3e8c;
     }
 
-    .hearts, .balloons, .fireworks {
+    .hearts, .fireworks, .confetti-canvas {
       position: fixed;
       top: 0;
       left: 0;
@@ -137,119 +139,83 @@
       100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
     }
 
-    .firework {
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      background: yellow;
-      border-radius: 50%;
-      animation: explode 1s ease-out forwards;
-    }
-
-    @keyframes explode {
-      0% { transform: scale(1); opacity: 1; }
-      100% { transform: scale(6); opacity: 0; }
-    }
-
-    .audio-player {
-      margin-top: 20px;
-      z-index: 999;
-      position: relative;
-    }
-
     @media (max-width: 600px) {
       h1 { font-size: 2rem; }
       .special-message { font-size: 1rem; }
       button { padding: 10px 18px; font-size: 0.9rem; }
-      .photo-slider .prev,
-      .photo-slider .next {
-        font-size: 1.5rem;
-        padding: 8px 12px;
-      }
     }
   </style>
 </head>
 <body>
-
-<h1>Happy Birthday Amisha 💖</h1>
-
-<!-- Photo Slider -->
-<div class="photo-slider">
-  <div class="slides" id="slider-track">
-    <img src="bebu-photo.jpg" alt="With My Bebu" />
-    <img src="3.jpg" alt="With My Bebu" />
-    <img src="2.jpg" alt="With My Bebu at Hill" />
-    <img src="1.jpg" alt="With My Bebu" />
-    <img src="4.jpg" alt="With My Bebu at Hill" />
+  <h1 id="typewriter"></h1>
+  <div class="slider-container">
+    <div class="slides" id="slides">
+      <img src="bebu-photo.jpg" alt="With My Bebu">
+      <img src="1.jpg" alt="Memories">
+      <img src="2.jpg" alt="Together">
+    </div>
+    <button class="slider-btn prev" onclick="changeSlide(-1)">❮</button>
+    <button class="slider-btn next" onclick="changeSlide(1)">❯</button>
   </div>
-  <button class="prev" onclick="changeSlide(-1)">❮</button>
-  <button class="next" onclick="changeSlide(1)">❯</button>
-</div>
 
-<!-- Special Message -->
-<div class="special-message">
-  <p>My dearest Bebu,</p>
-  <p>On your special day, I just want to say thank you for being my strength, my joy, and my peace through every storm. 💫</p>
-  <p>You’ve stood by me when life felt heavy, held my hand when I wanted to give up, and reminded me how beautiful love can be. 🥹💞</p>
-  <p>Your smile lights up my world and your love heals my heart.</p>
-  <p>I feel the luckiest man to be loved by someone as beautiful — inside and out — as you.</p>
-  <p>Happy Birthday, my jaan. May this day be as radiant as your soul. 🌸</p>
-  <p>Forever yours,<br/>💘 Your Love</p>
-</div>
+  <div class="special-message">
+    <p>My dearest Bebu,</p>
+    <p>On your special day, thank you for being my strength, my joy, and my peace through every storm. 💫</p>
+    <p>Your smile lights up my world. Happy Birthday, my jaan. 🌸</p>
+    <p>Forever yours,<br/>💘 Your Love</p>
+  </div>
 
-<!-- Audio Button -->
-<div class="audio-player">
-  <button onclick="document.getElementById('myAudio').play()">🎧 Play My Heart</button>
-  <audio id="myAudio" src="zaki (online-audio-converter.com).mp3"></audio>
-</div>
+  <div class="audio-player">
+    <button onclick="document.getElementById('myAudio').play()">🎧 Play My Heart</button>
+    <audio id="myAudio" src="zaki.mp3" preload="auto"></audio>
+  </div>
 
-<!-- Effects -->
-<div class="hearts"></div>
-<div class="fireworks"></div>
+  <div class="hearts"></div>
+  <canvas class="confetti-canvas"></canvas>
 
-<script>
-  // Slider Functionality
-  let currentSlide = 0;
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script>
+    let currentIndex = 0;
+    const slides = document.getElementById('slides');
+    const totalSlides = slides.children.length;
 
-  function showSlide(index) {
-    const track = document.getElementById("slider-track");
-    const totalSlides = track.children.length;
-
-    if (index >= totalSlides) currentSlide = 0;
-    else if (index < 0) currentSlide = totalSlides - 1;
-    else currentSlide = index;
-
-    track.style.transform = `translateX(-${currentSlide * 100}%)`;
-  }
-
-  function changeSlide(direction) {
-    showSlide(currentSlide + direction);
-  }
-
-  showSlide(0);
-
-  // Floating Hearts
-  for (let i = 0; i < 30; i++) {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDelay = Math.random() * 5 + "s";
-    document.querySelector(".hearts").appendChild(heart);
-  }
-
-  // Fireworks on click
-  document.addEventListener("click", (e) => {
-    for (let i = 0; i < 15; i++) {
-      const fw = document.createElement("div");
-      fw.className = "firework";
-      fw.style.left = e.clientX + Math.random() * 30 - 15 + "px";
-      fw.style.top = e.clientY + Math.random() * 30 - 15 + "px";
-      document.querySelector(".fireworks").appendChild(fw);
-      setTimeout(() => fw.remove(), 1000);
+    function changeSlide(direction) {
+      currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
+      slides.style.transform = `translateX(-${currentIndex * 100}%)`;
     }
-  });
-</script>
 
+    // Floating Hearts
+    for (let i = 0; i < 20; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDelay = Math.random() * 5 + "s";
+      document.querySelector(".hearts").appendChild(heart);
+    }
+
+    // Typewriter Effect
+    const msg = "Happy Birthday Amisha 💖";
+    let i = 0;
+    function typeWriter() {
+      if (i < msg.length) {
+        document.getElementById("typewriter").innerHTML += msg.charAt(i);
+        i++;
+        setTimeout(typeWriter, 100);
+      }
+    }
+    typeWriter();
+
+    // Confetti
+    confetti({
+      particleCount: 150,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+
+    // PWA service worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+  </script>
 </body>
 </html>
-
