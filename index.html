@@ -5,54 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Happy Birthday My Bebu 💖</title>
   <style>
-    .photo-slider {
-  position: relative;
-  max-width: 100%;
-  margin: 2rem auto;
-  overflow: hidden;
-  border-radius: 20px;
-}
-
-.slides {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-}
-
-.slides img {
-  min-width: 100%;
-  border-radius: 20px;
-}
-
-.photo-slider .prev,
-.photo-slider .next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(255, 105, 180, 0.7);
-  border: none;
-  color: white;
-  font-size: 2rem;
-  padding: 10px 15px;
-  cursor: pointer;
-  z-index: 2;
-  border-radius: 50%;
-}
-
-.photo-slider .prev { left: 10px; }
-.photo-slider .next { right: 10px; }
-
-@media (max-width: 600px) {
-  .slides img {
-    border-radius: 10px;
-  }
-
-  .photo-slider .prev,
-  .photo-slider .next {
-    font-size: 1.5rem;
-    padding: 8px 12px;
-  }
-}
-
     * {
       margin: 0;
       padding: 0;
@@ -79,26 +31,47 @@
       to { text-shadow: 0 0 20px #fff, 0 0 30px #ff1493; }
     }
 
-    .photo-section <div class="photo-slider">
-  <div class="slides">
-    <img src="bebu-photo.jpg" alt="With My Bebu" />
-    <img src="3.jpg" alt="With My Bebu" />
-    <img src="2.jpg" alt="With My Bebu at Hill" />
-    <img src="1.jpg" alt="With My Bebu" />
-    <img src="4.jpg" alt="With My Bebu at Hill" />
-  </div>
-  <button class="prev" onclick="changeSlide(-1)">❮</button>
-  <button class="next" onclick="changeSlide(1)">❯</button>
-</div>
-
-
-    .photo-section img {
-      width: 100%;
-      max-width: 400px;
+    /* === Slider === */
+    .photo-slider {
+      position: relative;
+      width: 90%;
+      max-width: 500px;
+      margin: 2rem auto;
+      overflow: hidden;
       border-radius: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      margin: 1rem auto;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      z-index: 5;
     }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slides img {
+      width: 100%;
+      flex-shrink: 0;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    .photo-slider .prev,
+    .photo-slider .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(255, 105, 180, 0.8);
+      border: none;
+      color: white;
+      font-size: 2rem;
+      padding: 10px 16px;
+      cursor: pointer;
+      border-radius: 50%;
+      z-index: 10;
+    }
+
+    .photo-slider .prev { left: 10px; }
+    .photo-slider .next { right: 10px; }
 
     .special-message {
       background: rgba(255, 255, 255, 0.15);
@@ -188,6 +161,11 @@
       h1 { font-size: 2rem; }
       .special-message { font-size: 1rem; }
       button { padding: 10px 18px; font-size: 0.9rem; }
+      .photo-slider .prev,
+      .photo-slider .next {
+        font-size: 1.5rem;
+        padding: 8px 12px;
+      }
     }
   </style>
 </head>
@@ -195,11 +173,20 @@
 
 <h1>Happy Birthday Amisha 💖</h1>
 
-<div class="photo-section">
-  <img src="bebu-photo.jpg" alt="With My Bebu">
-  <img src="bebu-photo (1).jpg" alt="With My Bebu at Hill">
+<!-- Photo Slider -->
+<div class="photo-slider">
+  <div class="slides" id="slider-track">
+    <img src="bebu-photo.jpg" alt="With My Bebu" />
+    <img src="3.jpg" alt="With My Bebu" />
+    <img src="2.jpg" alt="With My Bebu at Hill" />
+    <img src="1.jpg" alt="With My Bebu" />
+    <img src="4.jpg" alt="With My Bebu at Hill" />
+  </div>
+  <button class="prev" onclick="changeSlide(-1)">❮</button>
+  <button class="next" onclick="changeSlide(1)">❯</button>
 </div>
 
+<!-- Special Message -->
 <div class="special-message">
   <p>My dearest Bebu,</p>
   <p>On your special day, I just want to say thank you for being my strength, my joy, and my peace through every storm. 💫</p>
@@ -210,15 +197,37 @@
   <p>Forever yours,<br/>💘 Your Love</p>
 </div>
 
+<!-- Audio Button -->
 <div class="audio-player">
   <button onclick="document.getElementById('myAudio').play()">🎧 Play My Heart</button>
   <audio id="myAudio" src="zaki (online-audio-converter.com).mp3"></audio>
 </div>
 
+<!-- Effects -->
 <div class="hearts"></div>
 <div class="fireworks"></div>
 
 <script>
+  // Slider Functionality
+  let currentSlide = 0;
+
+  function showSlide(index) {
+    const track = document.getElementById("slider-track");
+    const totalSlides = track.children.length;
+
+    if (index >= totalSlides) currentSlide = 0;
+    else if (index < 0) currentSlide = totalSlides - 1;
+    else currentSlide = index;
+
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+  }
+
+  function changeSlide(direction) {
+    showSlide(currentSlide + direction);
+  }
+
+  showSlide(0);
+
   // Floating Hearts
   for (let i = 0; i < 30; i++) {
     const heart = document.createElement("div");
@@ -239,27 +248,6 @@
       setTimeout(() => fw.remove(), 1000);
     }
   });
-  let currentIndex = 0;
-
-function showSlide(index) {
-  const slides = document.querySelector(".slides");
-  const totalSlides = slides.children.length;
-  if (index >= totalSlides) currentIndex = 0;
-  else if (index < 0) currentIndex = totalSlides - 1;
-  else currentIndex = index;
-  slides.style.transform = `translateX(-${currentIndex * 100}%)`;
-}
-
-function changeSlide(direction) {
-  showSlide(currentIndex + direction);
-}
-
-// Optional: Auto-slide every 5s
-setInterval(() => changeSlide(1), 5000);
-
-// Initialize
-showSlide(0);
-
 </script>
 
 </body>
